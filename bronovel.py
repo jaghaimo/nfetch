@@ -11,7 +11,7 @@ def write_content(content: str, output_filename: str):
 
 
 def get_chapter(novel: str, chapter: str) -> str:
-    r = requests.get(f"https://boxnovel.com/novel/{novel}/chapter-{chapter}/")
+    r = requests.get(f"https://bronovel.com/novel/{novel}/chapter-{chapter}/")
     soup = BeautifulSoup(r.content, features="html.parser")
     for script in soup.find_all("script"):
         script.extract()
@@ -25,10 +25,10 @@ if __name__ == "__main__":
     parser.add_argument("-l", "--last-chapter", required=True, type=int)
     parser.add_argument("-e", "--extra-chapter", required=False, type=str)
     args = parser.parse_args()
-    print("Downloading chapters...")
-    for chapter in track(range(args.first_chapter, args.last_chapter)):
-        content = get_chapter(args.novel_title, chapter)
-        output_filename = f"{args.novel_title}-{chapter:05d}.html"
+    print(f"Downloading {args.novel_title} chapters from bronovel.com...")
+    for current_chapter in track(range(args.first_chapter, args.last_chapter)):
+        content = get_chapter(args.novel_title, str(current_chapter))
+        output_filename = f"{args.novel_title}-{current_chapter:05d}.html"
         write_content(str(content), output_filename)
     if args.extra_chapter:
         print("Downloading extra chapter...")

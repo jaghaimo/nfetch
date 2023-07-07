@@ -1,10 +1,16 @@
-tests: black flake isort
 
+## lint		- Run lint tools (e.g. black, flake8)
+.PHONY: lint
+lint: black ruff
+.PHONY: black
 black:
-	poetry run black --check --diff *.py
+	poetry run black --check --diff .
+.PHONY: ruff
+ruff:
+	poetry run ruff check .
 
-flake:
-	poetry run flake8 *.py
-
-isort:
-	poetry run isort --check --diff *.py
+## format		- Automatically fix all lint violations
+.PHONY: format
+format:
+	poetry run ruff check --fix .
+	poetry run black -q .

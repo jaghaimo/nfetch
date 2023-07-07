@@ -1,3 +1,11 @@
+[tool.black]
+line-length = 100
+target-version = ['py310']
+
+[tool.ruff]
+line-length = 100
+select = ["F", "E", "W", "C90", "I", "UP", "C4", "SIM", "ERA", "RUF"]
+
 [tool.poetry]
 name = "nfetch"
 version = "0.1.0"
@@ -7,14 +15,13 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-beautifulsoup4 = "^4.11.1"
-requests = "^2.28.1"
-rich = "^12.6.0"
+beautifulsoup4 = "^4"
+requests = "^2"
+rich = "^13"
 
 [tool.poetry.group.dev.dependencies]
-flake8 = "^5.0.4"
-black = "^22.10.0"
-isort = "^5.10.1"
+black = "^23"
+ruff = "^0"
 
 [build-system]
 requires = ["poetry-core"]
